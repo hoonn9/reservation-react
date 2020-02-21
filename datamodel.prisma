@@ -1,0 +1,46 @@
+type User {
+  id: ID! @id
+  userId: String! @unique
+  password: String!
+  email: String! @unique
+  username: String! @default(value: "")
+  nickname: String @unique
+  phoneNum: String!
+  bio: String @default(value: "")
+  address: String @default(value: "")
+  posts: [Post!]! @relation(name:"PostsOfUser", onDelete:CASCADE)
+  comments: [Comment!]! @relation(name:"CommentsOfUser", onDelete:CASCADE)
+  loginSecret: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Post {
+  id: ID! @id
+  type: String!
+  title: String!
+  content: String!
+  views: Int @default(value: 0)
+  user: User @relation(name:"PostsOfUser")
+  files: [File!]! @relation(name: "FilesOfPost" onDelete: CASCADE)
+  comments: [Comment!]! @relation(name: "CommentOfPost" onDelete: CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Comment {
+  id: ID! @id
+  text: String!
+  user: User @relation(name:"CommentsOfUser")
+  post: Post @relation(name:"CommentOfPost")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type File {
+  id: ID! @id
+  url: String!
+  post: Post @relation(name: "FilesOfPost")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

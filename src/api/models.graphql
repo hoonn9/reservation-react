@@ -22,7 +22,7 @@ type Post {
   content: String!
   views: Int
   user: User
-  files: [File!]!
+  files: [File!]
   comments: [Comment!]!
   createdAt: String
   updatedAt: String

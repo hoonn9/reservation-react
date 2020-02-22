@@ -4,6 +4,7 @@ import { GraphQLServer } from "graphql-yoga";
 import { authenticateJwt } from "./passport";
 import schema from "./schema";
 import { isAuthenticated } from "./middlewares";
+import { uploadController } from "./upload";
 const PORT = process.env.PORT || 4000;
 
 //context : resolver 끼리의 공유
@@ -20,6 +21,7 @@ server.express.use(logger("dev"));
 // server.express.use(passport.authenticate("jwt"));
 // 서버에 전달되는 모든 요청은 authenticateJwt 를 통과
 server.express.use(authenticateJwt);
+server.express.post("/api/upload", uploadController);
 server.start({ port: PORT }, () =>
   console.log(`Server running on http://localhost:${PORT}`)
 );

@@ -4,7 +4,22 @@ export default {
   Query: {
     seeFullPost: async (_, args) => {
       const { id } = args;
-      return prisma.post({ id });
+      try {
+        const post = await prisma.post({ id });
+        const { views } = post;
+        try {
+          await prisma.updatePost({
+            data: { views: views + 1 },
+            where: { id }
+          });
+          return post;
+        } catch (e) {
+          console.log(e);
+          return post;
+        }
+      } catch (e) {
+        return {};
+      }
     }
   }
 };

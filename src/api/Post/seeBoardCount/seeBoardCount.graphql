@@ -1,3 +1,3 @@
 type Query {
-  seeBoardCount(type: String!): Int!
+  seeBoardCount(boardId: String!, type: String): Int!
 }

@@ -28,6 +28,14 @@ type Post {
   updatedAt: String
 }
 
+type Board {
+  id: ID!
+  name: String!
+  posts: [Post!]
+  createdAt: String
+  updatedAt: String
+}
+
 type Comment {
   id: ID!
   text: String!

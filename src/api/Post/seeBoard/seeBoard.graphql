@@ -1,3 +1,9 @@
 type Query {
-  seeBoard(type: String!, first: Int, last: Int, skip: Int): [Post!]!
+  seeBoard(
+    boardId: String!
+    type: String!
+    first: Int
+    last: Int
+    skip: Int
+  ): [Post!]!
 }

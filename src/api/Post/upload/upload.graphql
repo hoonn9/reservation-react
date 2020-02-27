@@ -1,5 +1,6 @@
 type Mutation {
   upload(
+    boardId: String
     type: String!
     title: String!
     content: String!

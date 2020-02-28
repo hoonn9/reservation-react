@@ -1,0 +1,3 @@
+type Query {
+  seeFullEvent(id: String!): Event!
+}

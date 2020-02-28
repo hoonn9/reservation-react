@@ -1,0 +1,9 @@
+type Query {
+  seeEvent(
+    type: String
+    period: String
+    first: Int
+    last: Int
+    skip: Int
+  ): [Event!]!
+}

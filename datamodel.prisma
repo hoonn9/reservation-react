@@ -42,6 +42,7 @@ type Comment {
   text: String!
   user: User @relation(name:"CommentsOfUser")
   post: Post @relation(name:"CommentOfPost")
+  event: Event @relation(name: "CommentOfEvent")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -50,6 +51,20 @@ type File {
   id: ID! @id
   url: String!
   post: Post @relation(name: "FilesOfPost")
+  event: Event @relation(name: "FilesOfEvent")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Event {
+  id: ID! @id
+  type: String!
+  title: String!
+  period: String!
+  subTitle: String
+  content: String!
+  files: [File!] @relation(name: "FilesOfEvent" onDelete: CASCADE)
+  comments: [Comment!] @relation(name: "CommentOfEvent" onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

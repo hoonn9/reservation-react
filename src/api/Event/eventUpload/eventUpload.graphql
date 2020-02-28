@@ -1,0 +1,10 @@
+type Mutation {
+  eventUpload(
+    type: String!
+    title: String!
+    subTitle: String
+    period: String!
+    content: String!
+    files: [String!]
+  ): Event!
+}

@@ -10,6 +10,7 @@ type User {
   address: String @default(value: "")
   posts: [Post!]! @relation(name:"PostsOfUser", onDelete:CASCADE)
   comments: [Comment!]! @relation(name:"CommentsOfUser", onDelete:CASCADE)
+  reservations: [Reservation!] @relation(name:"ReservationsOfUser", onDelete:CASCADE)
   loginSecret: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -63,8 +64,29 @@ type Event {
   period: String!
   subTitle: String
   content: String!
+  thumbnail: String
   files: [File!] @relation(name: "FilesOfEvent" onDelete: CASCADE)
   comments: [Comment!] @relation(name: "CommentOfEvent" onDelete: CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Type {
+  id: ID! @id
+  typeName: String!
+  price: Int!
+  typeCount: Int! @default(value: 0)
+  reservations: [Reservation!] @relation(name: "ReservationsOfType" onDelete: CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Reservation {
+  id: ID! @id
+  user: User! @relation(name:"ReservationsOfUser")
+  type: Type! @relation(name: "ReservationsOfType")
+  checkIn: DateTime!
+  checkOut: DateTime!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

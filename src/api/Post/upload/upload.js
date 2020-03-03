@@ -13,7 +13,7 @@ export default {
         type,
         title,
         content,
-        views: 0,
+        views,
         user: { connect: { id: user.id } }
       });
       files.forEach(

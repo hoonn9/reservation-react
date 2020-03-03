@@ -5,6 +5,7 @@ type Mutation {
     subTitle: String
     period: String!
     content: String!
+    thumbnail: String
     files: [String!]
   ): Event!
 }

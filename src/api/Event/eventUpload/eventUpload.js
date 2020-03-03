@@ -6,13 +6,14 @@ export default {
     eventUpload: async (_, args, { request, isAuthenticated }) => {
       isAuthenticated(request);
       //const { user } = request;
-      const { type, title, subTitle, period, content, files } = args;
+      const { type, title, subTitle, period, content, files, thumbnail } = args;
       const event = await prisma.createEvent({
         type,
         title,
         subTitle,
         period,
-        content
+        content,
+        thumbnail
       });
       files.forEach(
         async file =>

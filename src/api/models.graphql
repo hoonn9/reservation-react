@@ -60,8 +60,29 @@ type Event {
   period: String!
   subTitle: String
   content: String!
+  thumbnail: String
   files: [File!]
   comments: [Comment!]
+  createdAt: String
+  updatedAt: String
+}
+
+type Type {
+  id: ID!
+  typeName: String!
+  typeCount: Int!
+  price: Int!
+  reservations: [Reservation!]
+  createdAt: String
+  updatedAt: String
+}
+
+type Reservation {
+  id: ID!
+  user: User!
+  type: Type!
+  checkIn: String!
+  checkOut: String!
   createdAt: String
   updatedAt: String
 }

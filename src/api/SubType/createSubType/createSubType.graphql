@@ -1,0 +1,8 @@
+type Mutation {
+  createSubType(
+    typeId: String!
+    subTypeName: String!
+    price: Int!
+    description: String!
+  ): SubType!
+}

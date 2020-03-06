@@ -76,7 +76,18 @@ type Type {
   typeName: String!
   price: Int!
   typeCount: Int! @default(value: 0)
+  subTypes: [SubType!] @relation(name: "SubTypesOfType" onDelete: CASCADE)
   reservations: [Reservation!] @relation(name: "ReservationsOfType" onDelete: CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type SubType {
+  id: ID! @id
+  type: Type! @relation(name: "SubTypesOfType")
+  subTypeName: String!
+  price: Int!
+  description: String!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -90,3 +101,4 @@ type Reservation {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
+

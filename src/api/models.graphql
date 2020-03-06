@@ -71,8 +71,18 @@ type Type {
   id: ID!
   typeName: String!
   typeCount: Int!
+  subTypes: [SubType!]
   price: Int!
   reservations: [Reservation!]
+  createdAt: String
+  updatedAt: String
+}
+
+type SubType {
+  id: ID!
+  subTypeName: String!
+  price: Int!
+  description: String!
   createdAt: String
   updatedAt: String
 }

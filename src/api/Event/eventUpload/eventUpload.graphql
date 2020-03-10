@@ -1,6 +1,6 @@
 type Mutation {
   eventUpload(
-    type: String!
+    eventType: String!
     title: String!
     subTitle: String
     period: String!

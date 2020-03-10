@@ -3,12 +3,12 @@ import { prisma } from "../../../../generated/prisma-client";
 export default {
   Query: {
     seeEvent: async (_, args) => {
-      const { type, period, first, last, skip } = args;
+      const { eventType, period, first, last, skip } = args;
 
       return prisma.events({
         where: {
-          type: type,
-          period: period
+          eventType,
+          period
         },
         first,
         last,

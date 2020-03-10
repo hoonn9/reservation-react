@@ -1,6 +1,6 @@
 type Query {
   seeEvent(
-    type: String
+    eventType: String
     period: String
     first: Int
     last: Int

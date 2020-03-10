@@ -55,7 +55,7 @@ type File {
 
 type Event {
   id: ID!
-  type: String!
+  eventType: String!
   title: String!
   period: String!
   subTitle: String

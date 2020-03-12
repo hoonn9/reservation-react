@@ -102,3 +102,11 @@ type Reservation {
   updatedAt: DateTime! @updatedAt
 }
 
+type Popup {
+  id: ID! @id
+  title: String!
+  content: String!
+  url: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

@@ -96,3 +96,12 @@ type Reservation {
   createdAt: String
   updatedAt: String
 }
+
+type Popup {
+  id: ID!
+  title: String!
+  content: String!
+  url: String
+  createdAt: String
+  updatedAt: String
+}

@@ -53,6 +53,7 @@ type File {
   url: String!
   post: Post @relation(name: "FilesOfPost")
   event: Event @relation(name: "FilesOfEvent")
+  type: Type @relation(name: "FilesOfType")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -78,6 +79,7 @@ type Type {
   typeCount: Int! @default(value: 0)
   subTypes: [SubType!] @relation(name: "SubTypesOfType" onDelete: CASCADE)
   reservations: [Reservation!] @relation(name: "ReservationsOfType" onDelete: CASCADE)
+  files: [File!] @relation(name: "FilesOfType" onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

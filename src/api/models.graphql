@@ -49,6 +49,8 @@ type File {
   id: ID!
   url: String!
   post: Post
+  event: Event
+  type: Type
   createdAt: String
   updatedAt: String
 }
@@ -74,6 +76,7 @@ type Type {
   subTypes: [SubType!]
   price: Int!
   reservations: [Reservation!]
+  files: [File!]
   createdAt: String
   updatedAt: String
 }

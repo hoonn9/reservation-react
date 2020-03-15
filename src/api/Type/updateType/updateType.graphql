@@ -1,0 +1,8 @@
+type Mutation {
+  updateType(
+    typeId: String!
+    typeName: String
+    price: String
+    files: [String!]
+  ): Type!
+}

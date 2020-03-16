@@ -17,6 +17,7 @@ type User {
 
 type Post {
   id: ID!
+  board: Board
   type: String!
   title: String!
   content: String!

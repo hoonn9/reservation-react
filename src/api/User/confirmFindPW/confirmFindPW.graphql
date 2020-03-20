@@ -1,0 +1,3 @@
+type Mutation {
+  confirmFindPW(secret: String!, email: String!, userId: String!): String!
+}

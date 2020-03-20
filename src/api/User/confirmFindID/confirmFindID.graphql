@@ -1,0 +1,3 @@
+type Mutation {
+  confirmFindID(secret: String!, email: String!): String!
+}

@@ -3,16 +3,16 @@ import { prisma } from "../../../../generated/prisma-client";
 
 export default {
   Mutation: {
-    requestSecret: async (_, args) => {
-      const { name, email } = args;
+    requestFindPW: async (_, args) => {
+      const { userId, email } = args;
       const loginSecret = generateSecret();
       try {
         const user = await prisma.user({ email });
-        if (name === user.username) {
+        if (user.userId === userId) {
           await sendSecretMail(email, loginSecret);
           await prisma.updateUser({
             data: { loginSecret },
-            where: { email }
+            where: { email: user.email }
           });
           return true;
         } else {

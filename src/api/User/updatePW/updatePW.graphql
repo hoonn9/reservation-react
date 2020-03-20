@@ -1,0 +1,3 @@
+type Mutation {
+  updatePW(currentPw: String!, newPw: String!): Boolean!
+}

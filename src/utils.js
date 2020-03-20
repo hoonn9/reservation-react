@@ -41,3 +41,14 @@ export const cryptoCipher = str => {
   result += cipher.final("base64"); // 'HbMtmFdroLU0arLpMflQYtt8xEf4lrPn5tX5k+a8Nzw='
   return result;
 };
+
+export const generatePassword = () => {
+  const length = 12;
+  const charset =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@_";
+  var retVal = "";
+  for (var i = 0, n = charset.length; i < length; ++i) {
+    retVal += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return retVal;
+};

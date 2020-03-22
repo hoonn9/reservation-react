@@ -5,6 +5,7 @@ import { authenticateJwt } from "./passport";
 import schema from "./schema";
 import { isAuthenticated } from "./middlewares";
 import { uploadController } from "./upload";
+const express = require("express");
 const PORT = process.env.PORT || 4000;
 
 //context : resolver 끼리의 공유
@@ -15,6 +16,8 @@ const server = new GraphQLServer({
     isAuthenticated
   })
 });
+
+server.express.use("/images", express.static("images"));
 
 server.express.use(logger("dev"));
 // 서버 Path 보호

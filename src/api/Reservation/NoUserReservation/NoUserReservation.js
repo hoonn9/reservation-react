@@ -2,12 +2,14 @@ import { prisma } from "../../../../generated/prisma-client";
 
 export default {
   Mutation: {
-    userReservation: async (_, args, { request, isAuthenticated }) => {
-      isAuthenticated(request);
-      const { user } = request;
+    noUserReservation: async (_, args) => {
       const {
         typeId,
         subTypeId,
+        reserveUserName,
+        reserveUserSex,
+        reserveUserPhone,
+        reserveUserEmail,
         guestUserName,
         guestUserSex,
         guestUserPhone,
@@ -19,6 +21,12 @@ export default {
         checkIn,
         checkOut
       } = args;
+      const noUser = await prisma.createNoUser({
+        username: reserveUserName,
+        bio: reserveUserSex,
+        phoneNum: reserveUserPhone,
+        email: reserveUserEmail
+      });
       const guest = await prisma.createGuest({
         username: guestUserName,
         bio: guestUserSex,
@@ -32,8 +40,8 @@ export default {
         subType: {
           connect: { id: subTypeId }
         },
-        user: {
-          connect: { id: user.id }
+        noUser: {
+          connect: { id: noUser.id }
         },
         guest: {
           connect: { id: guest.id }

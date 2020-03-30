@@ -5,7 +5,6 @@ import { authenticateJwt } from "./passport";
 import schema from "./schema";
 import { isAuthenticated } from "./middlewares";
 import { uploadController } from "./upload";
-process.env.PWD = process.cwd();
 const express = require("express");
 const PORT = process.env.PORT || 4000;
 
@@ -18,7 +17,7 @@ const server = new GraphQLServer({
   })
 });
 
-server.express.use("/images", express.static(process.env.PWD + "/images"));
+server.express.use("/images", express.static("images"));
 
 server.express.use(logger("dev"));
 // 서버 Path 보호

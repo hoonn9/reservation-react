@@ -16,6 +16,28 @@ type User {
   updatedAt: DateTime! @updatedAt
 }
 
+type NoUser {
+  id: ID! @id
+  username: String! @default(value: "")
+  bio: String @default(value: "")
+  phoneNum: String!
+  email: String!
+  reservations: [Reservation!] @relation(name:"ReservationsOfNoUser", onDelete:CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Guest {
+  id: ID! @id
+  username: String! @default(value: "")
+  bio: String @default(value: "")
+  phoneNum: String!
+  email: String!
+  reservation: Reservation
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
 type Post {
   id: ID! @id
   board: Board @relation(name:"PostsOfBoard")
@@ -78,7 +100,7 @@ type Type {
   price: Int!
   typeCount: Int! @default(value: 0)
   subTypes: [SubType!] @relation(name: "SubTypesOfType" onDelete: CASCADE)
-  reservations: [Reservation!] @relation(name: "ReservationsOfType" onDelete: CASCADE)
+  reservations: [Reservation!] @relation(name: "ReservationsOfType")
   files: [File!] @relation(name: "FilesOfType" onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -96,10 +118,16 @@ type SubType {
 
 type Reservation {
   id: ID! @id
-  user: User! @relation(name:"ReservationsOfUser")
+  user: User @relation(name:"ReservationsOfUser")
+  noUser: NoUser @relation(name:"ReservationsOfNoUser")
+  guest: Guest @relation(link: INLINE)
   type: Type! @relation(name: "ReservationsOfType")
+  subType: SubType
   checkIn: DateTime!
   checkOut: DateTime!
+  needs: String!
+  adult: Int!
+  child: Int!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

@@ -10,7 +10,30 @@ type User {
   bio: String
   posts: [Post!]!
   comments: [Comment!]!
+  reservations: [Reservation!]
   loginSecret: String
+  createdAt: String
+  updatedAt: String
+}
+
+type NoUser {
+  id: ID!
+  username: String!
+  bio: String
+  phoneNum: String!
+  email: String!
+  reservations: [Reservation!]
+  createdAt: String
+  updatedAt: String
+}
+
+type Guest {
+  id: ID!
+  username: String!
+  bio: String
+  phoneNum: String!
+  email: String!
+  reservation: Reservation
   createdAt: String
   updatedAt: String
 }
@@ -93,10 +116,16 @@ type SubType {
 
 type Reservation {
   id: ID!
-  user: User!
+  user: User
+  noUser: NoUser
+  guest: Guest
   type: Type!
+  subType: SubType
   checkIn: String!
   checkOut: String!
+  needs: String!
+  adult: Int!
+  child: Int!
   createdAt: String
   updatedAt: String
 }

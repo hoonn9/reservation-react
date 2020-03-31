@@ -25,6 +25,8 @@ export default {
         phoneNum: guestUserPhone,
         email: guestUserEmail
       });
+      const type = await prisma.type({ id: typeId });
+      const subType = await prisma.subType({ id: subTypeId });
       const reservation = await prisma.createReservation({
         type: {
           connect: { id: typeId }
@@ -38,13 +40,15 @@ export default {
         guest: {
           connect: { id: guest.id }
         },
+        price: type.price + subType.price,
+        count,
         needs,
+        count,
         adult,
         child,
         checkIn,
         checkOut
       });
-
       return reservation;
     }
   }

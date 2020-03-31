@@ -123,9 +123,11 @@ type Reservation {
   subType: SubType
   checkIn: String!
   checkOut: String!
+  count: Int!
   needs: String!
   adult: Int!
   child: Int!
+  price: Int!
   createdAt: String
   updatedAt: String
 }

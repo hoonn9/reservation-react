@@ -1,3 +1,7 @@
 type Query {
-  noUserCheck(username: String!, email: String!): [Reservation!]!
+  noUserCheck(
+    username: String!
+    email: String!
+    loginSecret: String!
+  ): [Reservation!]!
 }

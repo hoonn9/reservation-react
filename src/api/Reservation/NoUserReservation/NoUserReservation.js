@@ -21,43 +21,91 @@ export default {
         checkIn,
         checkOut
       } = args;
-      const noUser = await prisma.createNoUser({
-        username: reserveUserName,
-        bio: reserveUserSex,
-        phoneNum: reserveUserPhone,
-        email: reserveUserEmail
-      });
-      const guest = await prisma.createGuest({
-        username: guestUserName,
-        bio: guestUserSex,
-        phoneNum: guestUserPhone,
-        email: guestUserEmail
-      });
-      const type = await prisma.type({ id: typeId });
-      const subType = await prisma.subType({ id: subTypeId });
-      const reservation = await prisma.createReservation({
-        type: {
-          connect: { id: typeId }
-        },
-        subType: {
-          connect: { id: subTypeId }
-        },
-        noUser: {
-          connect: { id: noUser.id }
-        },
-        guest: {
-          connect: { id: guest.id }
-        },
-        price: type.price + subType.price,
-        count,
-        needs,
-        adult,
-        child,
-        checkIn,
-        checkOut
-      });
-
-      return reservation;
+      try {
+        const isNoUser = await prisma.$exists.noUser({
+          email: reserveUserEmail
+        });
+        if (isNoUser) {
+          const noUser = await prisma.updateNoUser({
+            where: { email: reserveUserEmail },
+            data: {
+              username: reserveUserName,
+              bio: reserveUserSex,
+              phoneNum: reserveUserPhone
+            }
+          });
+          const guest = await prisma.createGuest({
+            username: guestUserName,
+            bio: guestUserSex,
+            phoneNum: guestUserPhone,
+            email: guestUserEmail
+          });
+          const type = await prisma.type({ id: typeId });
+          const subType = await prisma.subType({ id: subTypeId });
+          const reservation = await prisma.createReservation({
+            type: {
+              connect: { id: typeId }
+            },
+            subType: {
+              connect: { id: subTypeId }
+            },
+            noUser: {
+              connect: { id: noUser.id }
+            },
+            guest: {
+              connect: { id: guest.id }
+            },
+            price: type.price + subType.price,
+            count,
+            needs,
+            adult,
+            child,
+            checkIn,
+            checkOut
+          });
+          return reservation;
+        } else {
+          const noUser = await prisma.createNoUser({
+            username: reserveUserName,
+            bio: reserveUserSex,
+            phoneNum: reserveUserPhone,
+            email: reserveUserEmail
+          });
+          const guest = await prisma.createGuest({
+            username: guestUserName,
+            bio: guestUserSex,
+            phoneNum: guestUserPhone,
+            email: guestUserEmail
+          });
+          const type = await prisma.type({ id: typeId });
+          const subType = await prisma.subType({ id: subTypeId });
+          const reservation = await prisma.createReservation({
+            type: {
+              connect: { id: typeId }
+            },
+            subType: {
+              connect: { id: subTypeId }
+            },
+            noUser: {
+              connect: { id: noUser.id }
+            },
+            guest: {
+              connect: { id: guest.id }
+            },
+            price: type.price + subType.price,
+            count,
+            needs,
+            adult,
+            child,
+            checkIn,
+            checkOut
+          });
+          return reservation;
+        }
+      } catch (error) {
+        console.log(error);
+        return null;
+      }
     }
   }
 };

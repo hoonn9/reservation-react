@@ -21,8 +21,9 @@ type NoUser {
   username: String! @default(value: "")
   bio: String @default(value: "")
   phoneNum: String!
-  email: String!
+  email: String! @unique
   reservations: [Reservation!] @relation(name:"ReservationsOfNoUser", onDelete:CASCADE)
+  loginSecret: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

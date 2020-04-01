@@ -23,6 +23,7 @@ type NoUser {
   phoneNum: String!
   email: String!
   reservations: [Reservation!]
+  loginSecret: String
   createdAt: String
   updatedAt: String
 }

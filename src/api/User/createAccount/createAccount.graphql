@@ -3,9 +3,11 @@ type Mutation {
     userId: String!
     password: String!
     username: String!
+    nickname: String!
     email: String!
     phoneNum: String!
     address: String
+    isAgree: Boolean!
   ): Boolean!
 }
 

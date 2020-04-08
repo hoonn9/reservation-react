@@ -12,6 +12,7 @@ type User {
   comments: [Comment!]! @relation(name:"CommentsOfUser", onDelete:CASCADE)
   reservations: [Reservation!] @relation(name:"ReservationsOfUser", onDelete:CASCADE)
   loginSecret: String
+  isAgree: Boolean! @default(value: false)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

@@ -12,6 +12,7 @@ type User {
   comments: [Comment!]!
   reservations: [Reservation!]
   loginSecret: String
+  isAgree: Boolean!
   createdAt: String
   updatedAt: String
 }

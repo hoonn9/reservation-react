@@ -1,0 +1,3 @@
+type Query {
+  searchRoom(count: Int!, checkIn: String!, checkOut: String!): [Room!]
+}

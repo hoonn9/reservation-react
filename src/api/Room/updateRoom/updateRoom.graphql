@@ -1,0 +1,8 @@
+type Mutation {
+  updateRoom(
+    roomId: String!
+    name: String
+    price: String
+    files: [String!]
+  ): Room!
+}

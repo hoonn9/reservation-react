@@ -4,8 +4,8 @@ export default {
   Mutation: {
     noUserReservation: async (_, args) => {
       const {
-        typeId,
-        subTypeId,
+        roomId,
+        packId,
         reserveUserName,
         reserveUserSex,
         reserveUserPhone,
@@ -19,11 +19,11 @@ export default {
         child,
         needs,
         checkIn,
-        checkOut
+        checkOut,
       } = args;
       try {
         const isNoUser = await prisma.$exists.noUser({
-          email: reserveUserEmail
+          email: reserveUserEmail,
         });
         if (isNoUser) {
           const noUser = await prisma.updateNoUser({
@@ -31,37 +31,37 @@ export default {
             data: {
               username: reserveUserName,
               bio: reserveUserSex,
-              phoneNum: reserveUserPhone
-            }
+              phoneNum: reserveUserPhone,
+            },
           });
           const guest = await prisma.createGuest({
             username: guestUserName,
             bio: guestUserSex,
             phoneNum: guestUserPhone,
-            email: guestUserEmail
+            email: guestUserEmail,
           });
-          const type = await prisma.type({ id: typeId });
-          const subType = await prisma.subType({ id: subTypeId });
+          const room = await prisma.room({ id: roomId });
+          const pack = await prisma.pack({ id: packId });
           const reservation = await prisma.createReservation({
-            type: {
-              connect: { id: typeId }
+            room: {
+              connect: { id: roomId },
             },
-            subType: {
-              connect: { id: subTypeId }
+            pack: {
+              connect: { id: packId },
             },
             noUser: {
-              connect: { id: noUser.id }
+              connect: { id: noUser.id },
             },
             guest: {
-              connect: { id: guest.id }
+              connect: { id: guest.id },
             },
-            price: type.price + subType.price,
+            price: room.price + pack.price,
             count,
             needs,
             adult,
             child,
             checkIn,
-            checkOut
+            checkOut,
           });
           return reservation;
         } else {
@@ -69,36 +69,36 @@ export default {
             username: reserveUserName,
             bio: reserveUserSex,
             phoneNum: reserveUserPhone,
-            email: reserveUserEmail
+            email: reserveUserEmail,
           });
           const guest = await prisma.createGuest({
             username: guestUserName,
             bio: guestUserSex,
             phoneNum: guestUserPhone,
-            email: guestUserEmail
+            email: guestUserEmail,
           });
-          const type = await prisma.type({ id: typeId });
-          const subType = await prisma.subType({ id: subTypeId });
+          const room = await prisma.room({ id: roomId });
+          const pack = await prisma.pack({ id: packId });
           const reservation = await prisma.createReservation({
-            type: {
-              connect: { id: typeId }
+            room: {
+              connect: { id: roomId },
             },
-            subType: {
-              connect: { id: subTypeId }
+            pack: {
+              connect: { id: packId },
             },
             noUser: {
-              connect: { id: noUser.id }
+              connect: { id: noUser.id },
             },
             guest: {
-              connect: { id: guest.id }
+              connect: { id: guest.id },
             },
-            price: type.price + subType.price,
+            price: room.price + pack.price,
             count,
             needs,
             adult,
             child,
             checkIn,
-            checkOut
+            checkOut,
           });
           return reservation;
         }
@@ -106,6 +106,6 @@ export default {
         console.log(error);
         return null;
       }
-    }
-  }
+    },
+  },
 };

@@ -3,7 +3,7 @@ import { prisma } from "../../../../generated/prisma-client";
 export default {
   Query: {
     seeBoardCount: async (_, args) => {
-      const { boardId, type } = args;
+      const { boardId, postType } = args;
 
       try {
         const count = await prisma
@@ -16,8 +16,8 @@ export default {
         console.log(e);
         return 0;
       }
-    }
-  }
+    },
+  },
 };
 
 // const count = await prisma

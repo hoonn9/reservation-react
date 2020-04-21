@@ -43,7 +43,7 @@ type Guest {
 type Post {
   id: ID! @id
   board: Board @relation(name:"PostsOfBoard")
-  type: String!
+  postType: String!
   title: String!
   content: String!
   views: Int @default(value: 0)
@@ -77,7 +77,7 @@ type File {
   url: String!
   post: Post @relation(name: "FilesOfPost")
   event: Event @relation(name: "FilesOfEvent")
-  type: Type @relation(name: "FilesOfType")
+  room: Room @relation(name: "FilesOfRoom")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -96,22 +96,22 @@ type Event {
   updatedAt: DateTime! @updatedAt
 }
 
-type Type {
+type Room {
   id: ID! @id
-  typeName: String!
+  name: String!
   price: Int!
-  typeCount: Int! @default(value: 0)
-  subTypes: [SubType!] @relation(name: "SubTypesOfType" onDelete: CASCADE)
-  reservations: [Reservation!] @relation(name: "ReservationsOfType")
-  files: [File!] @relation(name: "FilesOfType" onDelete: CASCADE)
+  count: Int! @default(value: 0)
+  packs: [Pack!] @relation(name: "PackOfRoom" onDelete: CASCADE)
+  reservations: [Reservation!] @relation(name: "ReservationsOfRoom")
+  files: [File!] @relation(name: "FilesOfRoom" onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
 
-type SubType {
+type Pack {
   id: ID! @id
-  type: Type! @relation(name: "SubTypesOfType")
-  subTypeName: String!
+  room: Room! @relation(name: "PackOfRoom")
+  name: String!
   price: Int!
   description: String!
   createdAt: DateTime! @createdAt
@@ -123,8 +123,8 @@ type Reservation {
   user: User @relation(name:"ReservationsOfUser")
   noUser: NoUser @relation(name:"ReservationsOfNoUser")
   guest: Guest @relation(link: INLINE)
-  type: Type! @relation(name: "ReservationsOfType")
-  subType: SubType
+  room: Room! @relation(name: "ReservationsOfRoom")
+  pack: Pack
   checkIn: DateTime!
   checkOut: DateTime!
   count: Int!

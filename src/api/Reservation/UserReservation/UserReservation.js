@@ -6,8 +6,8 @@ export default {
       isAuthenticated(request);
       const { user } = request;
       const {
-        typeId,
-        subTypeId,
+        roomId,
+        packId,
         guestUserName,
         guestUserSex,
         guestUserPhone,
@@ -17,39 +17,39 @@ export default {
         child,
         needs,
         checkIn,
-        checkOut
+        checkOut,
       } = args;
       const guest = await prisma.createGuest({
         username: guestUserName,
         bio: guestUserSex,
         phoneNum: guestUserPhone,
-        email: guestUserEmail
+        email: guestUserEmail,
       });
-      const type = await prisma.type({ id: typeId });
-      const subType = await prisma.subType({ id: subTypeId });
+      const room = await prisma.room({ id: roomId });
+      const pack = await prisma.pack({ id: packId });
       const reservation = await prisma.createReservation({
-        type: {
-          connect: { id: typeId }
+        room: {
+          connect: { id: roomId },
         },
-        subType: {
-          connect: { id: subTypeId }
+        pack: {
+          connect: { id: packId },
         },
         user: {
-          connect: { id: user.id }
+          connect: { id: user.id },
         },
         guest: {
-          connect: { id: guest.id }
+          connect: { id: guest.id },
         },
-        price: type.price + subType.price,
+        price: room.price + pack.price,
         count,
         needs,
         count,
         adult,
         child,
         checkIn,
-        checkOut
+        checkOut,
       });
       return reservation;
-    }
-  }
+    },
+  },
 };

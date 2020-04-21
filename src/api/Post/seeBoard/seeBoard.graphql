@@ -1,7 +1,7 @@
 type Query {
   seeBoard(
     boardId: String!
-    type: String!
+    postType: String!
     first: Int
     last: Int
     skip: Int

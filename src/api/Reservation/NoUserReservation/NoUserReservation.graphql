@@ -1,7 +1,7 @@
 type Mutation {
   noUserReservation(
-    typeId: String!
-    subTypeId: String!
+    roomId: String!
+    packId: String!
     reserveUserName: String!
     reserveUserSex: String!
     reserveUserPhone: String!

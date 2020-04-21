@@ -3,20 +3,20 @@ import { prisma } from "../../../../generated/prisma-client";
 export default {
   Query: {
     seeBoard: async (_, args) => {
-      const { boardId, type, first, last, skip } = args;
+      const { boardId, postType, first, last, skip } = args;
 
       return prisma.posts({
         where: {
           board: {
-            id: boardId
+            id: boardId,
           },
-          type: type
+          postType,
         },
         first,
         last,
         skip,
-        orderBy: "createdAt_DESC"
+        orderBy: "createdAt_DESC",
       });
-    }
-  }
+    },
+  },
 };

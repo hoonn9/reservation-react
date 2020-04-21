@@ -1,0 +1,8 @@
+type Mutation {
+  createPack(
+    roomId: String!
+    name: String!
+    price: Int!
+    description: String!
+  ): Pack!
+}

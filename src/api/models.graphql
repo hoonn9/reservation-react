@@ -76,7 +76,7 @@ type File {
   url: String!
   post: Post
   event: Event
-  type: Type
+  room: Room
   createdAt: String
   updatedAt: String
 }
@@ -95,22 +95,23 @@ type Event {
   updatedAt: String
 }
 
-type Type {
+type Room {
   id: ID!
-  typeName: String!
-  typeCount: Int!
-  subTypes: [SubType!]
+  name: String!
   price: Int!
+  count: Int!
+  packs: [Pack!]
   reservations: [Reservation!]
   files: [File!]
   createdAt: String
   updatedAt: String
 }
 
-type SubType {
+type Pack {
   id: ID!
-  subTypeName: String!
+  name: String!
   price: Int!
+  room: Room!
   description: String!
   createdAt: String
   updatedAt: String
@@ -121,8 +122,8 @@ type Reservation {
   user: User
   noUser: NoUser
   guest: Guest
-  type: Type!
-  subType: SubType
+  room: Room!
+  pack: Pack
   checkIn: String!
   checkOut: String!
   count: Int!

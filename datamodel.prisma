@@ -78,6 +78,7 @@ type File {
   post: Post @relation(name: "FilesOfPost")
   event: Event @relation(name: "FilesOfEvent")
   room: Room @relation(name: "FilesOfRoom")
+  popup: Popup @relation(name: "FilesOfPopup")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -89,7 +90,6 @@ type Event {
   period: String!
   subTitle: String
   content: String!
-  thumbnail: String
   files: [File!] @relation(name: "FilesOfEvent" onDelete: CASCADE)
   comments: [Comment!] @relation(name: "CommentOfEvent" onDelete: CASCADE)
   createdAt: DateTime! @createdAt
@@ -140,7 +140,7 @@ type Popup {
   id: ID! @id
   title: String!
   content: String!
-  url: String!
+  files: [File!] @relation(name: "FilesOfPopup" onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

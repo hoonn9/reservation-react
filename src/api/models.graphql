@@ -65,8 +65,10 @@ type Board {
 type Comment {
   id: ID!
   text: String!
+  nickname: String!
   user: User
   post: Post
+  event: Event
   createdAt: String
   updatedAt: String
 }
@@ -77,6 +79,7 @@ type File {
   post: Post
   event: Event
   room: Room
+  popup: Popup
   createdAt: String
   updatedAt: String
 }
@@ -88,7 +91,6 @@ type Event {
   period: String!
   subTitle: String
   content: String!
-  thumbnail: String
   files: [File!]
   comments: [Comment!]
   createdAt: String
@@ -139,7 +141,7 @@ type Popup {
   id: ID!
   title: String!
   content: String!
-  url: String
+  files: [File!]
   createdAt: String
   updatedAt: String
 }

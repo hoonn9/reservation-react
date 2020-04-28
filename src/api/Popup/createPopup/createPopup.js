@@ -9,9 +9,16 @@ export default {
       const popup = await prisma.createPopup({
         title,
         content,
-        url
+      });
+      await prisma.createFile({
+        url,
+        popup: {
+          connect: {
+            id: popup.id,
+          },
+        },
       });
       return popup;
-    }
-  }
+    },
+  },
 };

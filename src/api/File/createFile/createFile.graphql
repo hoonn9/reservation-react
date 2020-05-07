@@ -1,0 +1,3 @@
+type Mutation {
+  createFile(files: [String!]!, connectId: String!, typeName: String!): [File!]
+}
